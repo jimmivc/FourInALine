@@ -5,8 +5,10 @@
  */
 package juegazo;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import objects.CrackAI;
 import objects.Tablero;
 
 /**
@@ -15,14 +17,18 @@ import objects.Tablero;
  */
 public class IUJuegazo extends javax.swing.JFrame {
 
+    private int nivel;
     private Tablero tablero = new Tablero();
+    private CrackAI genious = new CrackAI(tablero,1);
     /**
      * Creates new form IUJuegazo
      */
     public IUJuegazo() {
+        nivel = 1;
         initComponents();
         acomodarTablero();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +49,6 @@ public class IUJuegazo extends javax.swing.JFrame {
         tablaJuego.setBorder(new javax.swing.border.MatteBorder(null));
         tablaJuego.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -78,6 +83,11 @@ public class IUJuegazo extends javax.swing.JFrame {
         tablaJuego.getAccessibleContext().setAccessibleName("tablero");
 
         jButton1.setText("Seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,6 +116,24 @@ public class IUJuegazo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int iFila = tablaJuego.getRowCount()-1;
+        int columna = tablaJuego.getSelectedColumn();
+        boolean colocada = false;
+        
+        while(iFila>-1 && !colocada){
+            if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
+                tablaJuego.setValueAt("X", iFila,columna);
+                tablero.colocarFicha(iFila,columna,1);
+                colocada = true;
+            }
+            iFila--;
+        }
+        System.out.println(tablero.mostrarTablero());
+        System.out.println(genious.getScore());
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -115,6 +143,8 @@ public class IUJuegazo extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void acomodarTablero() {
-        tablaJuego.setValueAt("Hola", 0, 0);
+        for(int i = 0 ; i<tablaJuego.getRowCount();i++)
+            for(int j = 0 ; j<tablaJuego.getColumnCount();j++)
+                tablaJuego.setValueAt("", i, j);
     }
 }

@@ -10,12 +10,15 @@ package objects;
  * @author Jimmi
  */
 public class Tablero {
-    int[][] tablero = new int[7][7];
+    private int[][] tablero = new int[6][7];
+    private static int p1 = 1;
+    private static int p2 = 2;
+    private static int vacio = 0;
     
     public Tablero(){
         for (int i = 0; i < tablero.length; i++) {
             for(int j = 0; j < tablero[0].length;j++){
-                tablero[i][j] = 0;
+                tablero[i][j] = vacio;
             }
         }
     }
@@ -35,4 +38,9 @@ public class Tablero {
     public int[][] getTablero(){
         return tablero;
     }
+
+    public void colocarFicha(int iFila, int columna,int player) {
+        tablero[iFila][columna] = player;
+    }
+    
 }
