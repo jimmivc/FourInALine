@@ -123,8 +123,12 @@ public class IUJuegazo extends javax.swing.JFrame {
         
         while(iFila>-1 && !colocada){
             if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
-                tablaJuego.setValueAt("X", iFila,columna);
-                tablero.colocarFicha(iFila,columna,1);
+            	if(tablero.isTurno()){
+            		tablaJuego.setValueAt("X", iFila,columna);
+            	}else{
+            		tablaJuego.setValueAt("O", iFila,columna);
+            	}
+                tablero.colocarFicha(iFila,columna);
                 colocada = true;
             }
             iFila--;
