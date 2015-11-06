@@ -8,7 +8,7 @@ package juegazo;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import objects.CrackAI;
+import objects.AI;
 import objects.Tablero;
 
 /**
@@ -19,14 +19,14 @@ public class IUJuegazo extends javax.swing.JFrame {
 
     private int nivel;
     private Tablero tablero;
-    private CrackAI genious;
+    private AI genious;
     /**
      * Creates new form IUJuegazo
      */
     public IUJuegazo(boolean iniciaP1, int pnivel) {
         nivel = pnivel;
         tablero = new Tablero(iniciaP1);
-        genious = new CrackAI(tablero,nivel);
+        genious = new AI(tablero,nivel);
         initComponents();
         acomodarTablero();
     }

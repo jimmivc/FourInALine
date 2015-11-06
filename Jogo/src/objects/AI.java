@@ -9,11 +9,11 @@ package objects;
  *
  * @author Jimmi
  */
-public class CrackAI {
+public class AI {
     private Tablero tablero;
     private int depth;
     
-    public CrackAI(Tablero tab,int pnivel){
+    public AI(Tablero tab,int pnivel){
         setTablero(tab);
         setDepth(pnivel);
     }
