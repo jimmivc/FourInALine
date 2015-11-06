@@ -8,7 +8,7 @@ package juegazo;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-import objects.CrackAI;
+import objects.AI;
 import objects.Tablero;
 
 /**
@@ -18,13 +18,15 @@ import objects.Tablero;
 public class IUJuegazo extends javax.swing.JFrame {
 
     private int nivel;
-    private Tablero tablero = new Tablero();
-    private CrackAI genious = new CrackAI(tablero,1);
+    private Tablero tablero;
+    private AI genious;
     /**
      * Creates new form IUJuegazo
      */
-    public IUJuegazo() {
-        nivel = 1;
+    public IUJuegazo(boolean iniciaP1, int pnivel) {
+        nivel = pnivel;
+        tablero = new Tablero(iniciaP1);
+        genious = new AI(tablero,nivel);
         initComponents();
         acomodarTablero();
     }
@@ -49,6 +51,7 @@ public class IUJuegazo extends javax.swing.JFrame {
         tablaJuego.setBorder(new javax.swing.border.MatteBorder(null));
         tablaJuego.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -117,24 +120,26 @@ public class IUJuegazo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int iFila = tablaJuego.getRowCount()-1;
-        int columna = tablaJuego.getSelectedColumn();
-        boolean colocada = false;
-        
-        while(iFila>-1 && !colocada){
-            if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
-            	if(tablero.isTurno()){
-            		tablaJuego.setValueAt("X", iFila,columna);
-            	}else{
-            		tablaJuego.setValueAt("O", iFila,columna);
-            	}
-                tablero.colocarFicha(iFila,columna);
-                colocada = true;
+        if(!tablero.isGameOver()){
+            int iFila = tablaJuego.getRowCount()-1;
+            int columna = tablaJuego.getSelectedColumn();
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
+                    if(tablero.isTurno()){
+                            tablaJuego.setValueAt("O", iFila,columna);
+                    }else{
+                            tablaJuego.setValueAt("X", iFila,columna);
+                    }
+                    tablero.colocarFicha(iFila,columna);
+                    colocada = true;
+                }
+                iFila--;
             }
-            iFila--;
         }
         System.out.println(tablero.mostrarTablero());
-        System.out.println(genious.getScore());
+        //System.out.println(genious.getScore());
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
