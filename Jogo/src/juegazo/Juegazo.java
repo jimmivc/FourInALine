@@ -5,7 +5,6 @@
  */
 package juegazo;
 
-import objects.Tablero;
 
 /**
  *
@@ -17,10 +16,11 @@ public class Juegazo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Tablero tablero = new Tablero();
-        System.out.print(tablero.mostrarTablero());
-        
-        IUJuegazo juego = new IUJuegazo();
+        //Tablero tablero = new Tablero(true);
+        //System.out.print(tablero.mostrarTablero());
+        boolean iniciaPlayer1 = true;
+        int nivel = 2;
+        IUJuegazo juego = new IUJuegazo(iniciaPlayer1,nivel);
         juego.setVisible(true);
     }
     
