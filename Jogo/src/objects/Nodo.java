@@ -18,7 +18,7 @@ public class Nodo {
     Nodo hijosT[];
     Nodo(Tablero pdato){
         setDato(pdato);
-        setHijos(new Nodo[1]);
+        setHijos(this.hijos);
     }
 
     public void setDato(Tablero dato) {

@@ -5,6 +5,9 @@
  */
 package objects;
 
+import java.util.Arrays;
+import org.omg.CORBA.INTERNAL;
+
 /**
  *
  * @author Jimmi
@@ -69,20 +72,54 @@ public class AI {
     public int minimax(int depth,int turn){
         System.out.println(arbolito.cantHojas());
         
-        
-        
-        
-        for(int i = 0; i<tablero.getTablero().length; i++){
-            Tablero tab = new Tablero(true);
+        for(int i = 0; i<7; i++){
+            Tablero tab;
+            int matriz[][] = new int[7][7];
+
+            for (int k = 0; k < 7; k++) {
+                for(int j = 0;j<7;j++){
+                    matriz[k][j] = arbolito.raiz.dato.getTablero()[k][j];
+                }
+            }
+            tab = new Tablero(matriz);
             tab.colocarFicha(1,i);
             arbolito.insertarRecursivo(arbolito.raiz, tab, arbolito.raiz.dato);
         }
+        
+        for(int i = 0; i<7; i++){
+            Tablero tab;
+            int matriz[][] = new int[7][7];
+
+            for (int l = 0; l < 7; l++) {
+                
+            for (int k = 0; k < 7; k++) {
+                for(int j = 0;j<7;j++){
+                    matriz[k][j] = arbolito.raiz.hijos[i].dato.getTablero()[k][j];
+                }
+            }
+            tab = new Tablero(matriz);
+            tab.colocarFicha(2,l);
+            
+            
+            arbolito.insertarRecursivo(arbolito.raiz, tab, arbolito.raiz.hijos[l].dato);   
+            }
+        }
+        
+        
         System.out.println(arbolito.cantHojas());
-        System.out.println(arbolito.cantHojas());
+        //System.out.println(arbolito.raiz.dato.mostrarTablero());
         
         for(int i = 0; i<tablero.getTablero().length; i++){
             System.out.println("hijos de la raiz"+ arbolito.raiz.hijos[i].dato.mostrarTablero());
         }
+        
+        for(int i = 0; i<tablero.getTablero().length; i++){
+            for (int j = 0; j < arbolito.raiz.hijos[i].hijos.length; j++) {
+                System.out.println("hijos de la raiz"+ arbolito.raiz.hijos[i].hijos[j].dato.mostrarTablero());   
+            }
+        }
+        
+        //System.out.println(arbolito.raiz.dato.mostrarTablero());
         
         return 0;
     }

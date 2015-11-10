@@ -9,14 +9,15 @@ package objects;
  *
  * @author Jimmi
  */
-public class Tablero {
-    private int[][] tablero = new int[7][7];
+public class Tablero{
+    private int[][] tablero;
     private boolean gameOver;
     private static int p1 = 1;
     private static int p2 = 2;
     private static boolean turno ;
     
     public Tablero(boolean primeraJugada){
+        tablero = new int[7][7];
         for (int i = 0; i < tablero.length; i++) {
             for(int j = 0; j < tablero[0].length;j++){
              
@@ -28,12 +29,16 @@ public class Tablero {
     }
 
     public Tablero() {
+        tablero = new int[7][7];
         for (int i = 0; i < tablero.length; i++) {
             for(int j = 0; j < tablero[0].length;j++){
              
             	tablero[i][j] = 0;
             }
         }
+    }
+    public Tablero(int[][] clon) {
+        this.tablero = clon;
     }
     
     public String mostrarTablero(){
@@ -50,6 +55,10 @@ public class Tablero {
     
     public int[][] getTablero(){
         return tablero;
+    }
+    
+    public void setTablero(int[][] tab){
+        tablero = tab;
     }
 
     public void colocarFicha(int player, int columna) {

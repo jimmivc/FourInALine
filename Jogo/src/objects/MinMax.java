@@ -5,6 +5,8 @@
  */
 package objects;
 
+import java.util.Arrays;
+
 /**
  *
  * @author Valeria
@@ -21,7 +23,7 @@ public class MinMax {
         Nodo nuevo = new Nodo(dato);
         
         //Si el padre es la raiz
-        if(nodo.getDato()==padre){
+        if(Arrays.deepEquals(nodo.getDato().getTablero(),padre.getTablero())){
             nodo.agregarHijos(nuevo);
         }else{
             //Si el padre es alguno de los hijos
