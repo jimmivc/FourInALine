@@ -11,8 +11,13 @@ package objects;
  */
 public class MinMax {
     
+    Nodo raiz;
     
-    public void insertarRecursivo(Nodo nodo/**raiz del arbol**/, int dato , int padre){
+    public MinMax(Tablero tab){
+         setRaiz(new Nodo(tab));
+    }
+    
+    public void insertarRecursivo(Nodo nodo/**raiz del arbol**/, Tablero dato , Tablero padre){
         Nodo nuevo = new Nodo(dato);
         
         //Si el padre es la raiz
@@ -32,7 +37,7 @@ public class MinMax {
         }
     }
   }
-    public int cantHojas(Nodo nodo){
+    private int cantHojas(Nodo nodo){
         int acum=0;
         if(nodo.getCantHijos()==0){
             return 1;
@@ -43,4 +48,18 @@ public class MinMax {
             return acum;
         }
     }
+    
+    public int cantHojas(){
+        return cantHojas(this.raiz);
+    }
+    
+    public Nodo getRaiz(){
+        return this.raiz;
+    }
+    
+    public void setRaiz(Nodo praiz){
+        this.raiz = praiz;
+    }
+    
+    
 }

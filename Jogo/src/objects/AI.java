@@ -12,10 +12,12 @@ package objects;
 public class AI {
     private Tablero tablero;
     private int depth;
+    private MinMax arbolito;
     
     public AI(Tablero tab,int pnivel){
         setTablero(tab);
         setDepth(pnivel);
+        arbolito = new MinMax(new Tablero());
     }
 
     /**
@@ -65,6 +67,22 @@ public class AI {
     }
     
     public int minimax(int depth,int turn){
+        System.out.println(arbolito.cantHojas());
+        
+        
+        
+        
+        for(int i = 0; i<tablero.getTablero().length; i++){
+            Tablero tab = new Tablero(true);
+            tab.colocarFicha(1,i);
+            arbolito.insertarRecursivo(arbolito.raiz, tab, arbolito.raiz.dato);
+        }
+        System.out.println(arbolito.cantHojas());
+        System.out.println(arbolito.cantHojas());
+        
+        for(int i = 0; i<tablero.getTablero().length; i++){
+            System.out.println("hijos de la raiz"+ arbolito.raiz.hijos[i].dato.mostrarTablero());
+        }
         
         return 0;
     }

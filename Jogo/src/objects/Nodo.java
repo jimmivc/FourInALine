@@ -10,17 +10,18 @@ package objects;
  * @author Valeria
  */
 public class Nodo {
-    int dato;
+    Tablero dato;
     int cantHijos;
     Nodo hijos[];
+    int valor;
     //un arreglo temporal
     Nodo hijosT[];
-    Nodo(int pdato){
+    Nodo(Tablero pdato){
         setDato(pdato);
-        setHijos(this.hijos);
+        setHijos(new Nodo[1]);
     }
 
-    public void setDato(int dato) {
+    public void setDato(Tablero dato) {
         this.dato = dato;
     }
 
@@ -32,7 +33,7 @@ public class Nodo {
         this.hijos = hijos;
     }
 
-    public int getDato() {
+    public Tablero getDato() {
         return dato;
     }
 

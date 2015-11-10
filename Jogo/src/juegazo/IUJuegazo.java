@@ -132,15 +132,14 @@ public class IUJuegazo extends javax.swing.JFrame {
                     }else{
                             tablaJuego.setValueAt("X", iFila,columna);
                     }
-                    tablero.colocarFicha(iFila,columna);
+                    tablero.colocarFicha(columna);
                     colocada = true;
                 }
                 iFila--;
             }
         }
         System.out.println(tablero.mostrarTablero());
-        //System.out.println(genious.getScore());
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     

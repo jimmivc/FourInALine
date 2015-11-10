@@ -26,6 +26,15 @@ public class Tablero {
         turno = primeraJugada;
         gameOver = false;
     }
+
+    public Tablero() {
+        for (int i = 0; i < tablero.length; i++) {
+            for(int j = 0; j < tablero[0].length;j++){
+             
+            	tablero[i][j] = 0;
+            }
+        }
+    }
     
     public String mostrarTablero(){
         String tabl = "";
@@ -43,22 +52,40 @@ public class Tablero {
         return tablero;
     }
 
-    public void colocarFicha(int iFila, int columna) {
+    public void colocarFicha(int player, int columna) {
     	if(!gameOver){
-            int player;
-            if(turno)
-                    player = p1;
-            else{
-                    player = p2;
-            }
-            if(turno){
+            int iFila = tablero.length-1;
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablero[iFila][columna]==0){
                     tablero[iFila][columna] = player;
-                    turno = false;
-            }else{
-                    tablero[iFila][columna] = player;
-                    turno = true;
-            }
+                    colocada = true;
+                }
+                iFila--;
+            }   
             //gameOver = ganaAlguien();
+        }
+    }
+    
+    public void colocarFicha(int columna){
+        if(!gameOver){
+            int iFila = tablero.length-1;
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablero[iFila][columna]==0){
+                    if(isTurno()){
+                            tablero[iFila][columna] = 1;
+                            turno = false;
+                    }else{
+                            tablero[iFila][columna] = 2;
+                            turno = true;
+                    }
+                    colocada = true;
+                }
+                iFila--;
+            }
         }
     }
 
