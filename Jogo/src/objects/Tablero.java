@@ -53,12 +53,12 @@ public class Tablero {
             }
             if(turno){
                     tablero[iFila][columna] = player;
-                    turno=false;
+                    turno = false;
             }else{
                     tablero[iFila][columna] = player;
                     turno = true;
             }
-            gameOver = ganaAlguien();
+            //gameOver = ganaAlguien();
         }
     }
 
@@ -73,7 +73,6 @@ public class Tablero {
     private boolean ganaAlguien(){
         boolean gana = false;
         int pGanador;
-        
         
         return true;
     }
