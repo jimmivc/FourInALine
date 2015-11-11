@@ -6,7 +6,7 @@
 package objects;
 
 import java.util.Arrays;
-
+import java.util.ArrayList;
 /**
  *
  * @author Valeria
@@ -28,7 +28,7 @@ public class MinMax {
         }else{
             //Si el padre es alguno de los hijos
             for(int i=0;i<nodo.cantHijos;i++){
-                if(nodo.hijos[i].getDato()==padre){
+                if(Arrays.deepEquals(nodo.hijos[i].getDato().getTablero(),padre.getTablero())){
                 //Se agrega el hijo
                     nodo.hijos[i].agregarHijos(nuevo);
                 }else{
@@ -51,6 +51,27 @@ public class MinMax {
         }
     }
     
+    public ArrayList<Nodo> getHojas(){
+        ArrayList hojas = new ArrayList<Nodo>();
+        
+        hojas = getHojas(hojas,raiz);
+        return hojas;
+    }
+    
+    private ArrayList<Nodo> getHojas(ArrayList<Nodo> hojas,Nodo nodo){
+        
+        if(nodo.getCantHijos()==0){
+            hojas.add(nodo);
+            return hojas;
+        }else{
+            for(int i=0; i<nodo.cantHijos;i++){
+                getHojas(hojas,nodo.hijos[i]);
+            }
+            return hojas;
+        }
+    }
+    
+    
     public int cantHojas(){
         return cantHojas(this.raiz);
     }
@@ -63,5 +84,27 @@ public class MinMax {
         this.raiz = praiz;
     }
     
+    public Nodo buscarTablero(Nodo tablero){
+        Nodo nodo;
+        nodo = getNodo(tablero,raiz);
+        return nodo;
+    }
     
+    private Nodo getNodo(Nodo nodo, Nodo buscando){
+        if (nodo != null){
+            if(Arrays.deepEquals(nodo.dato.getTablero(), buscando.dato.getTablero())){
+                return buscando;
+            }else{
+                for(int i=0; i<buscando.cantHijos;i++){
+                    getNodo(nodo,buscando.hijos[i]);
+                }
+            }
+        }
+        return null;
+    }
+    
+    public void cambiarRaiz(Nodo tableroNuevo){
+        Nodo nuevaRaiz = buscarTablero(tableroNuevo);
+        setRaiz(nuevaRaiz);
+    }
 }

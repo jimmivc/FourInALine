@@ -26,9 +26,11 @@ public class Juegazo {
         //int nivel = 2;
         //IUJuegazo juego = new IUJuegazo(iniciaPlayer1,nivel);
         //juego.setVisible(true);
-        
-        AI ai= new AI(new Tablero(),2);
-        ai.minimax(2, 1);
+        Tablero actual = new Tablero(true);
+        AI ai= new AI(actual,2);
+        MinMax arbol = new MinMax(new Tablero());
+        ai.minimax();
+        ai.hacerJugada();
     }
     
 }
