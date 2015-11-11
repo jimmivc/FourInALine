@@ -21,7 +21,8 @@ public class AI {
     public AI(Tablero tab,int pnivel){
         setTablero(tab);
         setDepth(pnivel);
-        arbolito = new MinMax(tablero);
+        arbolito = new MinMax(new Tablero());
+        minimax();
     }
 
     /**
@@ -157,7 +158,7 @@ public class AI {
                 turno = true;
             for (int i = 0; i < nodo.cantHijos; i++) {
                 
-                minimax(pdepth-1,turno, nodo.hijos[i]);    
+                minimax(pdepth-1,turno, nodo.hijos.get(i));    
                 
             }
             
@@ -184,21 +185,35 @@ public class AI {
     public void minimax(){
         minimax(depth,tablero.isTurno(), arbolito.getRaiz()); // false:genera el arbol desde el turno del jugador
         ArrayList<Nodo> hojas = arbolito.getHojas();
-        for(int i = 0; i<hojas.size(); i++){
-            System.out.println(hojas.get(i).dato.mostrarTablero());
-        }
+        //for(int i = 0; i<hojas.size(); i++){
+        //    System.out.println(hojas.get(i).dato.mostrarTablero());
+        //}
     }
     
-    public void hacerJugada(){
-        
-        Nodo[] primerNivel = arbolito.raiz.hijos;
-        tablero.colocarFicha(0);
+    public int hacerJugada(){
+        int jugada = 1;
+        if(!tablero.isTurno()){
+            arbolito.cambiarRaiz(new Nodo(tablero));
+            tablero.colocarFicha(jugada);
+            System.out.println(arbolito.raiz.dato.mostrarTablero());
+        }
+        return jugada;
+    }
+    
+    private void actualizarMinMax(){
+        ArrayList<Nodo> primerNivel = arbolito.raiz.hijos;
         System.out.println(tablero.mostrarTablero());
-        
-        arbolito.cambiarRaiz(new Nodo(tablero));
-        
-        arbolito.buscarTablero(primerNivel[0]).dato.mostrarTablero();
+        arbolito.buscarTablero(primerNivel.get(0)).dato.mostrarTablero();
         System.out.println(arbolito.raiz.dato.mostrarTablero());
+    }
+
+    private int columnaMejorJugada() {
+        int columna = recorrerMinMax();
+        return 0;
+    }
+
+    private int recorrerMinMax() {
+        return 1;
     }
     
 }

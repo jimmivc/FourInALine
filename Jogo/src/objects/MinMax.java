@@ -17,6 +17,7 @@ public class MinMax {
     
     public MinMax(Tablero tab){
          setRaiz(new Nodo(tab));
+         
     }
     
     public void insertarRecursivo(Nodo nodo/**raiz del arbol**/, Tablero dato , Tablero padre){
@@ -28,13 +29,13 @@ public class MinMax {
         }else{
             //Si el padre es alguno de los hijos
             for(int i=0;i<nodo.cantHijos;i++){
-                if(Arrays.deepEquals(nodo.hijos[i].getDato().getTablero(),padre.getTablero())){
+                if(Arrays.deepEquals(nodo.hijos.get(i).getDato().getTablero(),padre.getTablero())){
                 //Se agrega el hijo
-                    nodo.hijos[i].agregarHijos(nuevo);
+                    nodo.hijos.get(i).agregarHijos(nuevo);
                 }else{
                     //busca el padre en los hijos del nodo
                     //llamada recursiva
-                    insertarRecursivo(nodo.hijos[i],dato,padre);
+                    insertarRecursivo(nodo.hijos.get(i),dato,padre);
                 }
         }
     }
@@ -45,7 +46,7 @@ public class MinMax {
             return 1;
         }else{
             for(int i=0; i<nodo.cantHijos;i++){
-                acum+= cantHojas(nodo.hijos[i]);
+                acum+= cantHojas(nodo.hijos.get(i));
             }
             return acum;
         }
@@ -65,7 +66,7 @@ public class MinMax {
             return hojas;
         }else{
             for(int i=0; i<nodo.cantHijos;i++){
-                getHojas(hojas,nodo.hijos[i]);
+                getHojas(hojas,nodo.hijos.get(i));
             }
             return hojas;
         }
@@ -96,7 +97,7 @@ public class MinMax {
                 return buscando;
             }else{
                 for(int i=0; i<buscando.cantHijos;i++){
-                    getNodo(nodo,buscando.hijos[i]);
+                    getNodo(nodo,buscando.hijos.get(i));
                 }
             }
         }
@@ -104,7 +105,14 @@ public class MinMax {
     }
     
     public void cambiarRaiz(Nodo tableroNuevo){
-        Nodo nuevaRaiz = buscarTablero(tableroNuevo);
-        setRaiz(nuevaRaiz);
+        Nodo nuevaRaiz = null;
+        for(int i = 0;i<raiz.cantHijos;i++){
+            if(Arrays.deepEquals(tableroNuevo.dato.getTablero(), raiz.hijos.get(i).dato.getTablero())){
+                nuevaRaiz = raiz.hijos.get(i);
+                i = 10;
+            }
+        }
+        if(nuevaRaiz != null)
+            setRaiz(nuevaRaiz);
     }
 }
