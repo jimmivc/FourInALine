@@ -5,6 +5,9 @@
  */
 package juegazo;
 
+import objects.AI;
+import objects.*;
+
 
 /**
  *
@@ -18,10 +21,16 @@ public class Juegazo {
     public static void main(String[] args) {
         //Tablero tablero = new Tablero(true);
         //System.out.print(tablero.mostrarTablero());
+        //////////////////////////////////////////////////
         boolean iniciaPlayer1 = true;
         int nivel = 2;
         IUJuegazo juego = new IUJuegazo(iniciaPlayer1,nivel);
         juego.setVisible(true);
+        //Tablero actual = new Tablero(true);
+        //AI ai= new AI(actual,2);
+        //MinMax arbol = new MinMax(new Tablero());
+        //ai.minimax();
+        //ai.hacerJugada();
     }
     
 }

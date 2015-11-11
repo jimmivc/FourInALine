@@ -122,27 +122,26 @@ public class IUJuegazo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!tablero.isGameOver()){
             int iFila = tablaJuego.getRowCount()-1;
-            int columna = tablaJuego.getSelectedColumn();
+            int columna;
+            
+            columna = tablaJuego.getSelectedColumn();
+            
             boolean colocada = false;
 
             while(iFila>-1 && !colocada){
                 if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
                     if(tablero.isTurno()){
-                            tablaJuego.setValueAt("O", iFila,columna);
-                    }else{
-                            tablaJuego.setValueAt("X", iFila,columna);
+                        tablaJuego.setValueAt("O", iFila,columna);
+                        tablero.colocarFicha(columna);
+                        colocada = true;
                     }
-                    tablero.colocarFicha(iFila,columna);
-                    colocada = true;
                 }
                 iFila--;
             }
-            System.out.println(tablero.ganadorVertical(6,0));
-            System.out.println(tablero.ganadorHorizontal(6,6));
+            movimientoAI();
         }
         System.out.println(tablero.mostrarTablero());
-        //System.out.println(genious.getScore());
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
@@ -157,5 +156,21 @@ public class IUJuegazo extends javax.swing.JFrame {
         for(int i = 0 ; i<tablaJuego.getRowCount();i++)
             for(int j = 0 ; j<tablaJuego.getColumnCount();j++)
                 tablaJuego.setValueAt("", i, j);
+    }
+    
+    private void movimientoAI(){
+        boolean colocada = false;
+        int columna = genious.hacerJugada();
+        int iFila = tablaJuego.getRowCount()-1;
+        while(iFila > -1 && !colocada){
+            if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
+
+                
+                tablaJuego.setValueAt("X", iFila,columna);
+
+                colocada = true;
+            }
+            iFila--;
+        }
     }
 }
