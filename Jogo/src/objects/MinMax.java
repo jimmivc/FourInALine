@@ -13,13 +13,14 @@ public class MinMax {
     
     
     public void insertarRecursivo(Nodo nodo/**raiz del arbol**/, int dato , int padre){
+      
         Nodo nuevo = new Nodo(dato);
         
         //Si el padre es la raiz
         if(nodo.getDato()==padre){
             nodo.agregarHijos(nuevo);
         }else{
-            //Si el padre es alguno de los hijos
+            //Si el padre es alguno de los hijos del arbol
             for(int i=0;i<nodo.cantHijos;i++){
                 if(nodo.hijos[i].getDato()==padre){
                 //Se agrega el hijo

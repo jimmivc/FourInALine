@@ -137,6 +137,8 @@ public class IUJuegazo extends javax.swing.JFrame {
                 }
                 iFila--;
             }
+            System.out.println(tablero.ganadorVertical(6,0));
+            System.out.println(tablero.ganadorHorizontal(6,6));
         }
         System.out.println(tablero.mostrarTablero());
         //System.out.println(genious.getScore());
