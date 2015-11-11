@@ -72,7 +72,7 @@ public class IUJuegazo extends javax.swing.JFrame {
             }
         });
         tablaJuego.setToolTipText("");
-        tablaJuego.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablaJuego.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaJuego.setMaximumSize(new java.awt.Dimension(7, 7));
         tablaJuego.setMinimumSize(new java.awt.Dimension(7, 7));
         tablaJuego.setRowHeight(30);
@@ -164,7 +164,6 @@ public class IUJuegazo extends javax.swing.JFrame {
         int iFila = tablaJuego.getRowCount()-1;
         while(iFila > -1 && !colocada){
             if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
-
                 
                 tablaJuego.setValueAt("X", iFila,columna);
 

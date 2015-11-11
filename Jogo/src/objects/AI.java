@@ -194,17 +194,20 @@ public class AI {
         int jugada = 1;
         if(!tablero.isTurno()){
             arbolito.cambiarRaiz(new Nodo(tablero));
+            actualizarMinMax();
             tablero.colocarFicha(jugada);
-            System.out.println(arbolito.raiz.dato.mostrarTablero());
+            arbolito.cambiarRaiz(new Nodo(tablero));
+            System.out.println("Raiz Acutal!!! \n"+arbolito.raiz.dato.mostrarTablero());
         }
         return jugada;
     }
     
     private void actualizarMinMax(){
-        ArrayList<Nodo> primerNivel = arbolito.raiz.hijos;
-        System.out.println(tablero.mostrarTablero());
-        arbolito.buscarTablero(primerNivel.get(0)).dato.mostrarTablero();
-        System.out.println(arbolito.raiz.dato.mostrarTablero());
+        minimax(depth,tablero.isTurno(), arbolito.getRaiz()); // false:genera el arbol desde el turno del jugador
+        ArrayList<Nodo> hojas = arbolito.getHojas();
+        for(int i = 0; i<hojas.size(); i++){
+            System.out.println(hojas.get(i).dato.mostrarTablero());
+        }
     }
 
     private int columnaMejorJugada() {

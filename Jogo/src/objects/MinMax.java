@@ -109,7 +109,7 @@ public class MinMax {
         for(int i = 0;i<raiz.cantHijos;i++){
             if(Arrays.deepEquals(tableroNuevo.dato.getTablero(), raiz.hijos.get(i).dato.getTablero())){
                 nuevaRaiz = raiz.hijos.get(i);
-                i = 10;
+                i = raiz.cantHijos;
             }
         }
         if(nuevaRaiz != null)
