@@ -185,9 +185,9 @@ public class AI {
     public void minimax(){
         minimax(depth,tablero.isTurno(), arbolito.getRaiz()); // false:genera el arbol desde el turno del jugador
         ArrayList<Nodo> hojas = arbolito.getHojas();
-        //for(int i = 0; i<hojas.size(); i++){
-        //    System.out.println(hojas.get(i).dato.mostrarTablero());
-        //}
+        for(int i = 0; i<hojas.size(); i++){
+            System.out.println(hojas.get(i).dato.mostrarTablero());
+        }
     }
     
     public int hacerJugada(){

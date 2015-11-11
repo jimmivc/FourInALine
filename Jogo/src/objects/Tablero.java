@@ -61,21 +61,19 @@ public class Tablero {
         tablero = tab;		
     }
 
-    public void colocarFicha(int iFila, int columna) {
+    public void colocarFicha(int player, int columna) {
     	if(!gameOver){
-            int player;
-            if(turno)
-                    player = p1;
-            else{
-                    player = p2;
-            }
-            if(turno){
+            int iFila = tablero.length-1;
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablero[iFila][columna]==0){
                     tablero[iFila][columna] = player;
-                    turno = false;
-            }else{
-                    tablero[iFila][columna] = player;
-                    turno = true;
-            }
+                    colocada = true;
+                }
+                iFila--;
+            }   
+
             //gameOver = ganaAlguien();
         }
     }
