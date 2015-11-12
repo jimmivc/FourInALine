@@ -91,7 +91,7 @@ public class MinMax {
         return nodo;
     }
     
-    private Nodo getNodo(Nodo nodo, Nodo buscando){
+    public Nodo getNodo(Nodo nodo, Nodo buscando){
         if (nodo != null){
             if(Arrays.deepEquals(nodo.dato.getTablero(), buscando.dato.getTablero())){
                 return buscando;
@@ -115,4 +115,19 @@ public class MinMax {
         if(nuevaRaiz != null)
             setRaiz(nuevaRaiz);
     }
+    
+//    public int darAltura(){
+//        if(raiz.hijos == null);
+//            return 1;
+//        else{
+//            int maxAltura = 0;
+//            for( int i = 0; i < raiz.cantHijos; i++ ){
+//            NodoArbolNArio<T> hijo = hijos.darElemento( i );
+//            int auxAltura = hijo.darAltura( );
+//            if( auxAltura > maxAltura )
+//            maxAltura = auxAltura;
+//            }
+//            return maxAltura + 1;
+//        }
+//    }
 }

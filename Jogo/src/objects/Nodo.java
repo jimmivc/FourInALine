@@ -20,7 +20,7 @@ public class Nodo {
     Nodo hijosT[];
     Nodo(Tablero pdato){
         setDato(pdato);
-        setHijos(new ArrayList<Nodo>());
+        setHijos(null);
     }
 
     public void setDato(Tablero dato) {
@@ -48,6 +48,9 @@ public class Nodo {
     }
     
     public void agregarHijos(Nodo nodo){
+        if(hijos == null){
+            hijos = new ArrayList<Nodo>();
+        }
         hijos.add(nodo);
         setCantHijos(getCantHijos()+1);
     }

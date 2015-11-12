@@ -23,7 +23,7 @@ public class Juegazo {
         //System.out.print(tablero.mostrarTablero());
         //////////////////////////////////////////////////
         boolean iniciaPlayer1 = true;
-        int nivel = 2;
+        int nivel = 3;
         IUJuegazo juego = new IUJuegazo(iniciaPlayer1,nivel);
         juego.setVisible(true);
         //Tablero actual = new Tablero(true);

@@ -78,7 +78,7 @@ public class Tablero {
         }
     }
     
-        public void colocarFicha(int columna){
+    public void colocarFicha(int columna){
         if(!gameOver){
             int iFila = tablero.length-1;
             boolean colocada = false;
