@@ -5,22 +5,25 @@
  */
 package objects;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Valeria
  */
 public class Nodo {
-    int dato;
+    Tablero dato;
     int cantHijos;
-    Nodo hijos[];
+    ArrayList<Nodo> hijos;
+    int valor;
     //un arreglo temporal
     Nodo hijosT[];
-    Nodo(int pdato){
+    Nodo(Tablero pdato){
         setDato(pdato);
-        setHijos(this.hijos);
+        setHijos(null);
     }
 
-    public void setDato(int dato) {
+    public void setDato(Tablero dato) {
         this.dato = dato;
     }
 
@@ -28,11 +31,11 @@ public class Nodo {
         this.cantHijos = cantHijos;
     }
 
-    public void setHijos(Nodo[] hijos) {
+    public void setHijos(ArrayList<Nodo> hijos) {
         this.hijos = hijos;
     }
 
-    public int getDato() {
+    public Tablero getDato() {
         return dato;
     }
 
@@ -40,22 +43,15 @@ public class Nodo {
         return cantHijos;
     }
 
-    public Nodo[] getHijos() {
+    public ArrayList<Nodo> getHijos() {
         return hijos;
     }
     
-    public void copiarHijos(){
-        //Aumenta el tamanio del arreglo
-        hijosT= new Nodo[getCantHijos() +1];
-        for(int i =0;i<getCantHijos();i++){
-            hijosT[i] = hijos[i];
-        }
-    }
-    
     public void agregarHijos(Nodo nodo){
-        copiarHijos();//Primero aumento el tamanio del arreglo
-        hijosT[getCantHijos()]=nodo;
-        hijos= hijosT;
+        if(hijos == null){
+            hijos = new ArrayList<Nodo>();
+        }
+        hijos.add(nodo);
         setCantHijos(getCantHijos()+1);
     }
     
