@@ -17,7 +17,7 @@ public class Tablero {
     private static int p1 = 1;
     private static int p2 = 2;
     private static boolean turno ;
-    int valor ;
+    int valor = 0;
     
     public Tablero(boolean primeraJugada){
         tablero = new int[7][7];
@@ -184,43 +184,45 @@ public class Tablero {
             i=y;
         }
         while(i>=0&&sum!=4){
-            if(pos==1){
-                if(aux==getTablero()[i][y] || getTablero()[i][y]==2){
-                    sum+=1;
-                }else{
-                    sum=0;
-                }
-                 aux=getTablero()[i][y];
-                  i--;
-            }else if(pos==2){
-                if(aux==getTablero()[x][i]|| getTablero()[x][i]==2){
-                    sum+=1;
-                }else{
-                    sum=0;
-                }
-                aux=getTablero()[x][i];
-                 i--;
-            }else if(pos==3){
-                if(aux==getTablero()[i][cont] ||getTablero()[i][cont]==2){
+            if(cont>-1 && cont<7){
+                if(pos==1){
+                    if(aux==getTablero()[i][y] || getTablero()[i][y]==2){
                         sum+=1;
                     }else{
-                    sum=0;
-                }
-                    aux=getTablero()[i][cont];
-                    cont--;
+                        sum=0;
+                    }
+                     aux=getTablero()[i][y];
+                      i--;
+                }else if(pos==2){
+                    if(aux==getTablero()[x][i]|| getTablero()[x][i]==2){
+                        sum+=1;
+                    }else{
+                        sum=0;
+                    }
+                    aux=getTablero()[x][i];
                      i--;
-            }else if(pos==4){
-                if(i<6){
-                    i=-1;
-                }else{
-                if(aux==getTablero()[i][cont]||getTablero()[i][cont]==2){
-                    sum+=1;
-                }else{
-                    sum=0;
-                }
-                    aux=getTablero()[i][cont];
-                    cont++;
-                    i++;
+                }else if(pos==3){
+                    if(aux==getTablero()[i][cont] ||getTablero()[i][cont]==2){
+                            sum+=1;
+                        }else{
+                        sum=0;
+                    }
+                        aux=getTablero()[i][cont];
+                        cont--;
+                         i--;
+                }else if(pos==4){
+                    if(i<6){
+                        i=-1;
+                    }else{
+                    if(aux==getTablero()[i][cont]||getTablero()[i][cont]==2){
+                        sum+=1;
+                    }else{
+                        sum=0;
+                    }
+                        aux=getTablero()[i][cont];
+                        cont++;
+                        i++;
+                    }
                 }
             }
            
@@ -433,6 +435,32 @@ public class Tablero {
             }
         }
         gameOver = ganaAlguien;
+    }
+    
+    public int valorTablero(){
+        boolean ganaAlguien = false;
+        
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if(tablero[i][j] == 1){
+                    if(ganaHumano(i, j)){
+                        valor = 1;
+                        ganaAlguien = true;
+                    }
+                }else if (tablero[i][j]==2){
+                    if(ganaCompu(i, j)){
+                        valor = -1;
+                        ganaAlguien = true;
+                    }
+                }
+                if(ganaAlguien){
+                    j = 7;
+                    i = 7;
+                }
+            }
+        }
+        
+        return valor;
     }
     
 }

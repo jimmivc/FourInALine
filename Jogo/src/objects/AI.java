@@ -139,13 +139,42 @@ public class AI {
     
     private int columnaMejorJugada() {
         ArrayList<Nodo> hojas = arbolito.getHojas();
-        for (int i = 0; i < 10; i++) {
-            
+        ArrayList<Integer> valores = new ArrayList<>();
+        int columna= -1;
+        int posicionNodo = -1;
+        
+        for (int i = 0; i < hojas.size(); i++) {
+            valores.add(hojas.get(i).dato.valorTablero());
+            System.out.print(valores.get(i));
         }
-        return (int)(Math.floor((Math.random() * 6)+0));
-    }
-
-    private int recorrerMinMax() {
-        return 1;
+        //valor minimo
+        for (int i = 0; i < valores.size(); i++) {
+            if(valores.get(i)<0){
+                posicionNodo = i;
+            }
+        }
+        
+        int cantHojas = hojas.size();
+        int profundidad = depth;
+        int contador = 0;
+        
+        if(posicionNodo != -1){
+            for (int i = 0; i < profundidad; i++) {
+                for (int k = 0; k < 7; k++) {
+                    for (int j = 0; j < cantHojas; j++) {
+                        if (contador==posicionNodo) {
+                            posicionNodo = k;
+                            cantHojas /=7;
+                        }else{
+                            contador++;
+                        }
+                    }
+                }
+            }
+            return posicionNodo;
+        }else{
+            return (int)(Math.floor((Math.random() * 6)+0));
+        }
+        
     }
 }
