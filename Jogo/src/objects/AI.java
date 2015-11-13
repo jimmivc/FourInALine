@@ -52,87 +52,7 @@ public class AI {
     private void setDepth(int depth) {
         this.depth = depth;
     }
-    
-//    public int getScore(){
-//        //ganador por columna
-//        boolean ganaste = true;
-//        for(int i = 0;i<tablero.getTablero()[0].length;i++){
-//            if(tablero.getTablero()[5][i] == 1){
-//                for(int j = 5; j>2;j--){
-//                    if(tablero.getTablero()[j][i] != 1){
-//                        ganaste = false;
-//                    }
-//                }
-//                if(ganaste)
-//                        return 100;
-//                ganaste = true;
-//            }
-//        }
-//        return 0;
-//    }
-    
-//    public int minimax(int depth,int turn){
-//        System.out.println(arbolito.cantHojas());
-//        
-//        for(int i = 0; i<7; i++){
-//            Tablero tab;
-//            int matriz[][] = new int[7][7];
-//
-//            for (int k = 0; k < 7; k++) {
-//                for(int j = 0;j<7;j++){
-//                    matriz[k][j] = arbolito.raiz.dato.getTablero()[k][j];
-//                }
-//            }
-//            tab = new Tablero(matriz);
-//            tab.colocarFicha(1,i);
-//            arbolito.insertarRecursivo(arbolito.raiz, tab, arbolito.raiz.dato);
-//        }
-//        
-//        
-//        for(int i = 0; i<7; i++){
-//            Tablero tab;
-//            for (int l = 0; l < 7; l++) {
-//                
-//                int matriz[][] = new int[7][7];
-//
-//                for (int k = 0; k < 7; k++) {
-//                    for(int j = 0;j<7;j++){
-//                    matriz[k][j] = arbolito.raiz.hijos[l].dato.getTablero()[k][j];
-//                    }
-//                }
-//                
-//            tab = new Tablero(matriz);
-//            tab.colocarFicha(2,i);
-//            arbolito.insertarRecursivo(arbolito.raiz, tab, arbolito.raiz.hijos[l].dato);   
-//            }
-//        }
-//        
-//        
-//        System.out.println(arbolito.cantHojas());
-//        //System.out.println(arbolito.raiz.dato.mostrarTablero());
-//        
-//        for(int i = 0; i<tablero.getTablero().length; i++){
-//            System.out.println("hijos de la raiz"+ arbolito.raiz.hijos[i].dato.mostrarTablero());
-//        }
-//        
-//        for(int i = 0; i<tablero.getTablero().length; i++){
-//            for (int j = 0; j < arbolito.raiz.hijos[i].hijos.length; j++) {
-//                System.out.println("hijos de la raiz"+ arbolito.raiz.hijos[i].hijos[j].dato.mostrarTablero());   
-//            }
-//        }
-//        
-//        System.out.println(arbolito.raiz.cantHijos);
-//        System.out.println(arbolito.raiz.hijos[0].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[1].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[2].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[3].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[4].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[5].cantHijos);
-//        System.out.println(arbolito.raiz.hijos[6].cantHijos);
-//        
-//        return 0;
-//    }
-    
+
     public int minimax(int pdepth,boolean turno,Nodo nodo){
         System.out.println(arbolito.cantHojas());
         
@@ -162,30 +82,11 @@ public class AI {
             
         }
         
-        
-        
-        //System.out.println(arbolito.cantHojas());
-        //System.out.println(arbolito.raiz.dato.mostrarTablero());
-        
-        
-        //System.out.println(nodo.cantHijos);
-        //System.out.println(arbolito.raiz.hijos[0].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[1].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[2].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[3].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[4].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[5].cantHijos);
-        //System.out.println(arbolito.raiz.hijos[6].cantHijos);
-        
         return 0;
     }
     
     public void minimax(){
         minimax(depth,tablero.isTurno(), arbolito.getRaiz()); // false:genera el arbol desde el turno del jugador
-        //ArrayList<Nodo> hojas = arbolito.getHojas();
-        //for(int i = 0; i<hojas.size(); i++){
-        //    System.out.println(hojas.get(i).dato.mostrarTablero());
-        //}
     }
     
     public int hacerJugada(){
@@ -198,21 +99,10 @@ public class AI {
             arbolito.cambiarRaiz(new Nodo(tablero));
             actualizarMinMax();
             System.out.println("Raiz Actual!!! \n"+arbolito.raiz.dato.mostrarTablero());
-            //ArrayList<Nodo> hojas = arbolito.getHojas();
-            //for(int i = 0; i<hojas.size(); i++){
-            //    System.out.println(hojas.get(i).dato.mostrarTablero());
-            //}
         }
         return jugada;
     }
-    //sirve con nivel 2
-//    private void actualizarMinMax(){
-//        minimax(depth,tablero.isTurno(), arbolito.getRaiz()); // false:genera el arbol desde el turno del jugador
-//        ArrayList<Nodo> hojas = arbolito.getHojas();
-//        for(int i = 0; i<hojas.size(); i++){
-//            System.out.println(hojas.get(i).dato.mostrarTablero());
-//        }
-//    }
+
     
     private void actualizarMinMax(){
         ArrayList<Nodo> hojas = arbolito.getHojas();

@@ -5,18 +5,22 @@
  */
 package objects;
 
+import java.awt.Color;
+
 /**
  *
  * @author Jimmi
  */
 public class Tablero {
-    private int[][] tablero = new int[7][7];
+    private int[][] tablero;
     private boolean gameOver;
     private static int p1 = 1;
     private static int p2 = 2;
     private static boolean turno ;
+    int valor ;
     
     public Tablero(boolean primeraJugada){
+        tablero = new int[7][7];
         for (int i = 0; i < tablero.length; i++) {
             for(int j = 0; j < tablero[0].length;j++){
              
@@ -26,6 +30,20 @@ public class Tablero {
         turno = primeraJugada;
         gameOver = false;
     }
+    
+    public Tablero() {        
+        tablero = new int[7][7];        
+        for (int i = 0; i < tablero.length; i++) {        
+            for(int j = 0; j < tablero[0].length;j++){        
+                     
+                tablero[i][j] = 0;        
+            }        
+        }        
+    }        
+    public Tablero(int[][] clon) {        
+        this.tablero = clon;        
+    }
+
     
     public String mostrarTablero(){
         String tabl = "";
@@ -42,23 +60,47 @@ public class Tablero {
     public int[][] getTablero(){
         return tablero;
     }
+    
+    public void setTablero(int[][] tab){        
+        tablero = tab;        
+    }
 
-    public void colocarFicha(int iFila, int columna) {
+
+    public void colocarFicha(int player, int columna) {
     	if(!gameOver){
-            int player;
-            if(turno)
-                    player = p1;
-            else{
-                    player = p2;
-            }
-            if(turno){
+            int iFila = tablero.length-1;
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablero[iFila][columna]==0){
                     tablero[iFila][columna] = player;
-                    turno = false;
-            }else{
-                    tablero[iFila][columna] = player;
-                    turno = true;
+                    colocada = true;
+                }
+                iFila--;
             }
             //gameOver = ganaAlguien();
+        }
+    }
+    
+    public void colocarFicha(int columna){
+        if(!gameOver){
+            int iFila = tablero.length-1;
+            boolean colocada = false;
+
+            while(iFila>-1 && !colocada){
+                if(tablero[iFila][columna]==0){
+                    if(isTurno()){
+                            tablero[iFila][columna] = 1;
+                            turno = false;
+                    }else{
+                            tablero[iFila][columna] = 2;
+                            turno = true;
+                    }
+                    colocada = true;
+                }
+                iFila--;
+            }
+            ganaAlguien();
         }
     }
 
@@ -82,46 +124,50 @@ public class Tablero {
             i=y;
         }
         while(i>=0&&sum!=4){
-            if(pos==1){
-                if(aux==getTablero()[i][y] || getTablero()[i][y]==1){
-                    sum+=1;
-                }else{
-                    sum=0;
-                }
-                 aux=getTablero()[i][y];
-                  i--;
-            }else if(pos==2){
-                if(aux==getTablero()[x][i]|| getTablero()[x][i]==1){
-                    sum+=1;
-                }else{
-                    sum=0;
-                }
-                aux=getTablero()[x][i];
-                 i--;
-            }else if(pos==3){
-                if(aux==getTablero()[i][cont] ||getTablero()[i][cont]==1){
+            if(cont>-1 && cont<7){
+                if(pos==1){
+                    if(aux==getTablero()[i][y] || getTablero()[i][y]==1){
                         sum+=1;
                     }else{
-                    sum=0;
-                }
-                    aux=getTablero()[i][cont];
-                    cont--;
+                        sum=0;
+                    }
+                     aux=getTablero()[i][y];
+                      i--;
+                }else if(pos==2){
+                    if(aux==getTablero()[x][i]|| getTablero()[x][i]==1){
+                        sum+=1;
+                    }else{
+                        sum=0;
+                    }
+                    aux=getTablero()[x][i];
                      i--;
-            }else if(pos==4){
-                if(i<6){
-                    i=-1;
-                }else{
-                if(aux==getTablero()[i][cont]||getTablero()[i][cont]==1){
-                    sum+=1;
-                }else{
-                    sum=0;
+                }else if(pos==3){
+                    if(aux==getTablero()[i][cont] ||getTablero()[i][cont]==1){
+                            sum+=1;
+                        }else{
+                        sum=0;
+                    }
+                        aux=getTablero()[i][cont];
+                        cont--;
+                         i--;
+                }else if(pos==4){
+                    if(i<6){
+                        i=-1;
+                    }else{
+                    if(aux==getTablero()[i][cont]||getTablero()[i][cont]==1){
+                        sum+=1;
+                    }else{
+                        sum=0;
+                    }
+                        aux=getTablero()[i][cont];
+                        cont++;
+                        i++;
+                    }
                 }
-                    aux=getTablero()[i][cont];
-                    cont++;
-                    i++;
-                }
+            }else{
+                i = -1;
             }
-           
+            
         }
         return fourInRow(sum);
     }
@@ -265,12 +311,14 @@ public class Tablero {
 	if(getTablero()[x][y]==1){
             if((y-3)>=0 && (x-3)>=0){
                 for(int i=x;i>=0;i--){
-                    if(getTablero()[i][cont]==1){
-                        var+=1;
-                    }else if(getTablero()[i][cont]==2){
-                        var2+=1;
+                    if(cont > -1){
+                        if(getTablero()[i][cont]==1){
+                            var+=1;
+                        }else if(getTablero()[i][cont]==2){
+                            var2+=1;
+                        }
+                        cont--;
                     }
-                    cont--;
 	        }
             }
         }else if(getTablero()[x][y]==2){
@@ -307,24 +355,28 @@ public class Tablero {
 	if(getTablero()[x][y]==1){
             if((y+3)<=7 && (x+3)<=7){
                 for(int i=x;i<=6;i++){
-                    if(getTablero()[i][cont]==1){
-                        var+=1;
-                    }else if(getTablero()[i][cont]==2){
-                        var2+=1;
+                    if(cont<7){
+                        if(getTablero()[i][cont]==1){
+                            var+=1;
+                        }else if(getTablero()[i][cont]==2){
+                            var2+=1;
+                        }
+                        cont++;
                     }
-                    cont++;
 	        }
             }
         }else if(getTablero()[x][y]==2){
             if((y+3)<=7 && (x+3)<=7){
                  for(int i=x;i<=6;i++){ 
-                    if(getTablero()[i][cont]==1){
-                        var+=1;
-                    }else if(getTablero()[i][cont]==2){
-                        var2+=1;
-                    }
+                    if(cont<7){
+                        if(getTablero()[i][cont]==1){
+                            var+=1;
+                        }else if(getTablero()[i][cont]==2){
+                            var2+=1;
+                        }
 	        //return -1; 
-                    cont++;           
+                    cont++;     
+                     }
                 }
             }
         }    
@@ -357,12 +409,30 @@ public class Tablero {
         }
     }
     
-        private boolean ganaCompu(int x,int y){
+    private boolean ganaCompu(int x,int y){
         if(ganadorVertical(x,y)==-1||ganadorHorizontal(x,y)==-1||ganadorDiagonalIzqDer(x,y)==-1||ganadorDiagonalDerIzq(x,y)==-1){
             return true;
         }else{
             return false;
         }
+    }
+    
+    private void ganaAlguien(){
+        boolean ganaAlguien = false;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if(tablero[i][j] == 1){
+                    ganaAlguien = ganaHumano(i, j);
+                }else if (tablero[i][j]==2){
+                    ganaAlguien = ganaCompu(i, j);
+                }
+                if(ganaAlguien){
+                    j = 7;
+                    i = 7;
+                }
+            }
+        }
+        gameOver = ganaAlguien;
     }
     
 }

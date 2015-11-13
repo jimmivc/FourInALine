@@ -13,7 +13,7 @@ import objects.*;
  *
  * @author Jimmi
  */
-public class Juegazo {
+public class CuatroEnRaya {
 
     /**
      * @param args the command line arguments

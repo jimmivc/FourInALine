@@ -128,17 +128,18 @@ public class IUJuegazo extends javax.swing.JFrame {
             
             boolean colocada = false;
 
-            while(iFila>-1 && !colocada){
-                if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
-                    if(tablero.isTurno()){
-                        tablaJuego.setValueAt("O", iFila,columna);
-                        tablero.colocarFicha(columna);
-                        colocada = true;
+        while(iFila>-1 && !colocada){
+            if(tablaJuego.getValueAt(iFila, columna).toString().equals("")){
+                if(tablero.isTurno()){
+                    tablaJuego.setValueAt("O", iFila,columna);
+                    tablero.colocarFicha(columna);
+                    colocada = true;
                     }
                 }
                 iFila--;
             }
-            movimientoAI();
+            if(!tablero.isGameOver())
+                movimientoAI();
         }
         System.out.println(tablero.mostrarTablero());
 
